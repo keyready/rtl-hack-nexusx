@@ -1,0 +1,46 @@
+{
+  "extends": "stylelint-config-standard-scss",
+  "plugins": [
+    "stylelint-order"
+  ],
+  "rules": {
+    "indentation": [
+      4
+    ],
+    "selector-class-pattern": null,
+    "block-closing-brace-empty-line-before": [
+      "never",
+      {
+        "except": [
+          "after-closing-brace"
+        ]
+      }
+    ],
+    "order/properties-order": [
+      [
+        "cursor",
+        "width",
+        "height",
+        "margin",
+        "padding",
+        "border",
+        "border-radius",
+        "color",
+        "background",
+        "display",
+        "flex-direction",
+        "align-items",
+        "justify-content",
+        "gap",
+        "font",
+        "font-size",
+        "font-weight",
+        "transition"
+      ],
+      {
+        "unspecified": "bottom"
+      }
+    ],
+    "scss/double-slash-comment-whitespace-inside": "always"
+  }
+}

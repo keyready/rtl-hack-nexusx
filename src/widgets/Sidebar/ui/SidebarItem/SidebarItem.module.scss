@@ -1,0 +1,24 @@
+.item {
+    .icon {
+        width: 20px;
+        height: 20px;
+        fill: var(--inverted-primary-color);
+    }
+
+    &:hover .icon {
+        fill: var(--primary-color);
+    }
+}
+
+.link {
+    margin-left: 10px;
+    opacity: 1;
+}
+
+.collapsed {
+    .link {
+        width: 0;
+        display: none;
+        transition: 0.2s;
+    }
+}

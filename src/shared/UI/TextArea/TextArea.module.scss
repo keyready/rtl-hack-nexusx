@@ -1,0 +1,13 @@
+.TextArea {
+    width: 100%;
+    padding: 5px 10px;
+    border: 2px solid var(--primary-color);
+    border-radius: 5px;
+    color: var(--primary-color);
+    background: transparent;
+    font: var(--font-m);
+    outline: none;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    min-height: 50px;
+}

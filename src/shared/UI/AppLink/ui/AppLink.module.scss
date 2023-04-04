@@ -1,0 +1,64 @@
+.AppLink {
+    padding: 2px 7px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    font: var(--font-m);
+    transition: 200ms;
+
+    &:link,
+    &:visited {
+        color: var(--primary-color);
+        text-decoration: none;
+    }
+
+    // &:hover {
+    //    color: var(--inverted-primary-color);
+    //    background: var(--inverted-bg-color);
+    // }
+}
+
+.outlined {
+    &:link,
+    &:visited {
+        border: 2px solid var(--primary-color);
+        color: var(--primary-color);
+        background: transparent;
+        text-decoration: none;
+    }
+
+    &:hover {
+        border: 2px solid var(--secondary-color);
+        color: var(--secondary-color);
+        background: transparent;
+    }
+}
+
+.inverted {
+    &:link,
+    &:visited {
+        color: var(--inverted-primary-color);
+        background: var(--inverted-bg-color);
+    }
+
+    &:hover {
+        color: var(--primary-color);
+        background: var(--bg-color);
+    }
+}
+
+.outlined-inverted {
+    &:link,
+    &:visited {
+        border: 2px solid var(--inverted-primary-color);
+        color: var(--inverted-primary-color);
+        background: transparent;
+        text-decoration: none;
+    }
+
+    &:hover {
+        border: 2px solid var(--inverted-secondary-color);
+        color: var(--inverted-secondary-color);
+        background: transparent;
+    }
+}

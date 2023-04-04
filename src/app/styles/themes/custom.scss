@@ -1,0 +1,26 @@
+@import "~bootstrap/scss/bootstrap";
+
+.modal-content {
+    .modal-body {
+        border: blue;
+        background-color: var(--bg-color);
+    }
+
+    .modal-header {
+        color: var(--inverted-primary-color);
+        background-color: var(--inverted-bg-color);
+
+        .close {
+            color: blueviolet;
+
+            &:hover {
+                color: darkorchid;
+            }
+        }
+    }
+
+    .modal-footer {
+        color: orangered;
+        background-color: green;
+    }
+}

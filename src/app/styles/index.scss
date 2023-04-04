@@ -1,0 +1,36 @@
+@import "reset";
+@import "./variables/globals";
+@import "./themes/normal";
+@import "./themes/dark";
+@import "./themes/custom";
+@import "~bootstrap/scss/bootstrap";
+
+.app,
+.app_modal {
+    color: var(--primary-color);
+    font: var(--font-m);
+}
+
+.app {
+    background: var(--bg-color);
+    min-height: 100vh;
+}
+
+.page {
+    display: flex;
+}
+
+*::-webkit-scrollbar {
+    width: 10px;
+    height: 15px;
+}
+
+*::-webkit-scrollbar-track {
+    background: var(--card-bg);
+}
+
+*::-webkit-scrollbar-thumb {
+    border: 2px solid var(--inverted-bg-color);
+    border-radius: 10px;
+    background-color: var(--bg-color);
+}

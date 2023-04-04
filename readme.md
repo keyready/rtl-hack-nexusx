@@ -1,31 +1,3 @@
-<style>
-    .link-btn:link,
-    .link-btn:visited {
-        text-decoration: none;
-        border-radius: 4px;
-        outline: 2px solid blue;
-        color: lightblue;
-        text-align: left;
-        padding: 2px 5px;
-        margin-right: 7px;
-    }
-
-    .badge {
-        opacity: 0.4;
-        color: greenyellow;
-    }
-
-    .badge.Backend {
-        opacity: 0.6;
-        color: blue;
-    }
-
-    .badge.frontend {
-        opacity: 0.6;
-        color: red;
-    }
-</style>
-
 <h1 align="center">
 Решение трека №1 от команды NexusX Team | RTL.Hack
 </h1>
@@ -38,36 +10,37 @@
 
 <ul>
     <li>
-        <a href="https://t.me/G_Rosman" class="link-btn">
+        <a href="https://t.me/G_Rosman" style="text-decoration: none; border-radius: 4px; outline: 2px solid blue; color: lightblue; text-align: left; padding: 2px 5px; margin-right: 7px;">
             Яроцкий Глеб
         </a>
-        <span class="badge Backend">(Backend-разработка)</span>
+        <span style="opacity: 0.6; color: blue;">(Backend-разработка)</span>
     </li>
     <li>
-        <a href="https://t.me/operculum" class="link-btn">
+        <a href="https://t.me/operculum" style="text-decoration: none; border-radius: 4px; outline: 2px solid blue; color: lightblue; text-align: left; padding: 2px 5px; margin-right: 7px;">
             Поляков Дмитрий
         </a>
-        <span class="badge">(UI/UX, спикер)</span>
+        <span style="opacity: 0.4; color: greenyellow;">(UI/UX, спикер)</span>
     </li>
     <li>
-        <a href="https://t.me/VALI666KO" class="link-btn">
+        <a href="https://t.me/VALI666KO" style="text-decoration: none; border-radius: 4px; outline: 2px solid blue; color: lightblue; text-align: left; padding: 2px 5px; margin-right: 7px;">
             Кофанов Валентин
         </a>
-        <span class="badge Backend">(Backend-разработка)</span>
+        <span style="opacity: 0.6; color: blue;">(Backend-разработка)</span>
     </li>
     <li>
-        <a href="https://t.me/kasperrr123" class="link-btn">
+        <a href="https://t.me/kasperrr123" style="text-decoration: none; border-radius: 4px; outline: 2px solid blue; color: lightblue; text-align: left; padding: 2px 5px; margin-right: 7px;">
             Низамидинов Малик
         </a>
-        <span class="badge Backend">(Backend-разработка)</span>
+        <span style="opacity: 0.6; color: blue;">(Backend-разработка)</span>
     </li>
     <li>
-        <a href="https://t.me/keyrea_dy" class="link-btn">
+        <a href="https://t.me/keyrea_dy" style="text-decoration: none; border-radius: 4px; outline: 2px solid blue; color: lightblue; text-align: left; padding: 2px 5px; margin-right: 7px;">
             Корчак Родион
         </a>
-        <span class="badge frontend">(Frontend-разработка, капитан команды)</span>
+        <span style="opacity: 0.6; color: red;">(Frontend-разработка, капитан команды)</span>
     </li>
 </ul>
+
 
 ### Скрипты приложения:
 

@@ -1,6 +1,7 @@
 const fs = require('fs');
 const jsonServer = require('json-server');
 const path = require('path');
+const express = require('express');
 
 const server = jsonServer.create();
 const PORT = 9999;
@@ -8,6 +9,7 @@ const router = jsonServer.router(path.resolve(__dirname, 'db.json'));
 
 server.use(jsonServer.defaults({}));
 server.use(jsonServer.bodyParser);
+server.use(express.json());
 
 // Нужно для небольшой задержки, чтобы запрос проходил не мгновенно, имитация реального апи
 // server.use(async (req, res, next) => {
@@ -18,6 +20,12 @@ server.use(jsonServer.bodyParser);
 // });
 
 // Эндпоинт для логина
+
+server.post('/upload', (req, res) => {
+    console.log(req.files);
+
+    return res.json({ message: 'угу' });
+});
 server.post('/login', (req, res) => {
     try {
         const { username, password } = req.body;

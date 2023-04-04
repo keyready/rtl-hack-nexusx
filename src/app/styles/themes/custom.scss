@@ -24,3 +24,17 @@
         background-color: green;
     }
 }
+
+.offcanvas-header {
+    color: var(--primary-color);
+    background: var(--bg-color);
+}
+
+.offcanvas-body,
+.form-control {
+    color: var(--inverted-primary-color);
+    background: var(--inverted-bg-color);
+}
+
+$input-bg: var(--bg-color);
+$input-focus-bg: var(--bg-color);

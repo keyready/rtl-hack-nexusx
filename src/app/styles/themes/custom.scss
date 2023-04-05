@@ -25,15 +25,20 @@
     }
 }
 
-.offcanvas-header {
-    color: var(--primary-color);
-    background: var(--bg-color);
+.offcanvas {
+    padding: 30px 10px 10px;
 }
 
-.offcanvas-body,
-.form-control {
-    color: var(--inverted-primary-color);
-    background: var(--inverted-bg-color);
+.btn-clear {
+    margin: 0;
+    padding: 0;
+    border: none;
+    transition: 200ms;
+    outline: none;
+
+    &:hover {
+        transform: scale(1.05);
+    }
 }
 
 $input-bg: var(--bg-color);

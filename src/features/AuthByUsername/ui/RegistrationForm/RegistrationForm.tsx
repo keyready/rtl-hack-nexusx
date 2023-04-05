@@ -16,6 +16,9 @@ import {
     ReducersList,
     DynamicModuleLoader,
 } from 'shared/lib/DynamicModuleLoader/DynamicModuleLoader';
+import VisibleEyeIcon from 'shared/assets/icons/visible-eye.svg';
+import HiddenEyeIcon from 'shared/assets/icons/hidden-eye.svg';
+import { Icon } from 'shared/UI/Icon/Icon';
 import {
     getCurrentlyUploaded,
     getTotalFileSize,
@@ -65,6 +68,7 @@ export const RegistrationForm = memo((props: RegistrationFormProps) => {
 
     const [currentPage, setCurrentPage] = useState<string>('first');
     const [registerResult, setRegisterResult] = useState<string>('');
+    const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
     const tabsNames: string[] = useMemo(() => ['first', 'second', 'third'], []);
 
@@ -156,7 +160,13 @@ export const RegistrationForm = memo((props: RegistrationFormProps) => {
                                 placeholder="Отчество"
                             />
                         </InputGroup>
-                        <Button type="submit" variant="success">Далее</Button>
+                        <Button
+                            className={classes.btn}
+                            type="submit"
+                            variant="primary"
+                        >
+                            Далее
+                        </Button>
                     </Form>
                 </Tab>
                 <Tab
@@ -176,16 +186,37 @@ export const RegistrationForm = memo((props: RegistrationFormProps) => {
                                 placeholder="Почта"
                             />
                         </InputGroup>
-                        <InputGroup className="mb-3">
-                            <InputGroup.Text>Пароль</InputGroup.Text>
-                            <Form.Control
-                                onChange={changePasswordHandler}
-                                value={password}
-                                placeholder="Пароль"
-                                type="password"
-                            />
-                        </InputGroup>
-                        <Button type="submit" variant="success">Далее</Button>
+                        <div className={classes.relativeInput}>
+                            <InputGroup className="mb-3">
+                                <InputGroup.Text>Пароль</InputGroup.Text>
+                                <Form.Control
+                                    onChange={changePasswordHandler}
+                                    value={password}
+                                    placeholder="Пароль"
+                                    type={isPasswordVisible ? 'text' : 'password'}
+                                />
+                            </InputGroup>
+                            <Button
+                                className={classes.hideButton}
+                                variant="clear"
+                                onClick={() => setIsPasswordVisible((prev) => !prev)}
+                            >
+                                {isPasswordVisible
+                                    ? (
+                                        <Icon className={classes.icon} Svg={VisibleEyeIcon} />
+                                    )
+                                    : (
+                                        <Icon className={classes.icon} Svg={HiddenEyeIcon} />
+                                    )}
+                            </Button>
+                        </div>
+                        <Button
+                            className={classes.btn}
+                            type="submit"
+                            variant="primary"
+                        >
+                            Далее
+                        </Button>
                     </Form>
                 </Tab>
                 <Tab
@@ -248,7 +279,11 @@ export const RegistrationForm = memo((props: RegistrationFormProps) => {
 
                         {isRegisterLoading
                             ? (
-                                <Button variant="success" disabled>
+                                <Button
+                                    className={classes.btn}
+                                    variant="primary"
+                                    disabled
+                                >
                                     <Spinner
                                         className={classes.spinner}
                                         as="span"
@@ -262,8 +297,8 @@ export const RegistrationForm = memo((props: RegistrationFormProps) => {
                             : registerResult
                                 ? (
                                     <Button
-                                        variant="primary"
-                                        className={classes.link}
+                                        className={classes.btn}
+                                        variant="success"
                                         onClick={onRegisterSuccessful}
                                     >
                                         Войти
@@ -271,8 +306,9 @@ export const RegistrationForm = memo((props: RegistrationFormProps) => {
                                 )
                                 : (
                                     <Button
+                                        className={classes.btn}
                                         type="submit"
-                                        variant="success"
+                                        variant="primary"
                                     >
                                         Регистрация
                                     </Button>

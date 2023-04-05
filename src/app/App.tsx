@@ -33,7 +33,6 @@ export const App = () => {
                             direction="end"
                             show={show}
                             setShow={setShow}
-                            header="Регистрация"
                         >
                             <RegistrationForm onRegisterSuccessful={() => setShow(false)} />
                         </Sidebar>

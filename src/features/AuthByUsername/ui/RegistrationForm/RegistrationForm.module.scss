@@ -9,3 +9,24 @@
 .bar {
     height: 25px;
 }
+
+.icon {
+    width: 30px;
+    height: 30px;
+    fill: var(--inverted-primary-color);
+}
+
+.relativeInput {
+    position: relative;
+}
+
+.hideButton {
+    z-index: 1000;
+    position: absolute;
+    right: -5px;
+    top: -2px;
+}
+
+.btn {
+    width: 100%;
+}

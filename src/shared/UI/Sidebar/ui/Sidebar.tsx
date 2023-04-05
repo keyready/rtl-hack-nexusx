@@ -1,5 +1,5 @@
 import { classNames } from 'shared/lib/classNames/classNames';
-import { memo, ReactNode, useState } from 'react';
+import { memo, ReactNode } from 'react';
 import { Offcanvas } from 'react-bootstrap';
 import { OffcanvasPlacement } from 'react-bootstrap/Offcanvas';
 import classes from './Sidebar.module.scss';
@@ -9,7 +9,6 @@ interface SidebarProps {
     children?: ReactNode;
     show?: boolean;
     setShow?: (show: boolean) => void;
-    header?: string;
     direction?: OffcanvasPlacement;
 }
 
@@ -19,7 +18,6 @@ export const Sidebar = memo((props: SidebarProps) => {
         setShow,
         show,
         children,
-        header,
         direction = 'start',
     } = props;
 
@@ -32,11 +30,12 @@ export const Sidebar = memo((props: SidebarProps) => {
             show={show}
             onHide={handleClose}
         >
-            {header && (
-                <Offcanvas.Header closeButton>
-                    <Offcanvas.Title>{header}</Offcanvas.Title>
-                </Offcanvas.Header>
-            )}
+            <Offcanvas.Header
+                className={classes.header}
+            >
+                <img src="static/images/ret-logo.svg" />
+            </Offcanvas.Header>
+
             <Offcanvas.Body>
                 {children}
             </Offcanvas.Body>

@@ -239,7 +239,7 @@ export const RegistrationForm = memo((props: RegistrationFormProps) => {
                             && !registerError
                             && !registerResult && (
                             <InputGroup className="mb-3">
-                                <InputGroup.Text>Юзернейм</InputGroup.Text>
+                                <InputGroup.Text>@</InputGroup.Text>
                                 <Form.Control
                                     onChange={changeUsernameHandler}
                                     value={username}

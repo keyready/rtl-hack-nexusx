@@ -3,7 +3,7 @@
 .modal-content {
     .modal-body {
         border: blue;
-        background-color: var(--bg-color);
+        background: linear-gradient(180deg, #c4e0ff 0%, rgb(2 31 87 / 0%) 100%);
     }
 
     .modal-header {
@@ -23,6 +23,10 @@
         color: orangered;
         background-color: green;
     }
+}
+
+.input-group-text {
+    background: var(--bg-color);
 }
 
 .offcanvas {

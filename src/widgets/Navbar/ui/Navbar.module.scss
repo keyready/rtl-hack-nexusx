@@ -5,12 +5,48 @@
     background: var(--inverted-bg-color);
     display: flex;
     align-items: center;
-}
-
-.link {
-    margin-left: auto;
+    position: relative;
 }
 
 .appName {
     width: var(--sidebar-width);
+}
+
+.link {
+    &::after {
+        content: " | ";
+    }
+}
+
+.bannerWrapper {
+    max-width: 100vw;
+    overflow: hidden;
+}
+
+.banner {
+    height: 250px;
+    max-width: 100vw;
+
+    @media (width <= 900px) {
+        height: 150px;
+    }
+}
+
+.links {
+    display: flex;
+}
+
+.linksDropdown {
+    display: none;
+}
+
+@media (width <= 1100px) {
+    .links {
+        display: none;
+    }
+
+    .linksDropdown {
+        display: block;
+    }
+
 }

@@ -3,11 +3,12 @@
  * (с) Федя Заволокин, 20:28, 04.04.2023
  */
 
-import {
-    ChangeEvent, FormEvent, memo, useCallback, useState,
+import React, {
+    ChangeEvent, FormEvent, memo, useCallback, useMemo, useState,
 } from 'react';
 import {
-    Button, ButtonGroup, Form, InputGroup, ProgressBar, Tab, Tabs,
+    Alert,
+    Button, Form, InputGroup, ProgressBar, Spinner, Tab, Tabs,
 } from 'react-bootstrap';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useSelector } from 'react-redux';
@@ -15,8 +16,15 @@ import {
     ReducersList,
     DynamicModuleLoader,
 } from 'shared/lib/DynamicModuleLoader/DynamicModuleLoader';
+import {
+    getCurrentlyUploaded,
+    getTotalFileSize,
+} from '../../model/selectors/getLoginUploadProgress/getLoginUploadProgress';
+import {
+    getLoginError,
+    getLoginIsLoading,
+} from '../../model/selectors/getLoginStatus/getLoginStatus';
 import { registerUser } from '../../model/services/registerUser/registerUser';
-import { getLoginPassword } from '../../model/selectors/getLoginPassword/getLoginPassword';
 import { loginActions, loginReducer } from '../../model/slices/loginSlice';
 import classes from './RegistrationForm.module.scss';
 import {
@@ -24,13 +32,13 @@ import {
     getLoginFirstname,
     getLoginLastname,
     getLoginMiddlename,
-} from '../../model/selectors/getPersonalInfo/getPersonalInfo';
-import {
     getLoginUsername,
-} from '../../model/selectors/getLoginUsername/getLoginUsername';
+    getLoginPassword,
+} from '../../model/selectors/getPersonalInfo/getPersonalInfo';
 
 interface RegistrationFormProps {
     className?: string;
+    onRegisterSuccessful?: () => void;
 }
 
 const initialReducers: ReducersList = {
@@ -40,6 +48,7 @@ const initialReducers: ReducersList = {
 export const RegistrationForm = memo((props: RegistrationFormProps) => {
     const {
         className,
+        onRegisterSuccessful,
     } = props;
 
     const dispatch = useAppDispatch();
@@ -49,23 +58,24 @@ export const RegistrationForm = memo((props: RegistrationFormProps) => {
     const email = useSelector(getLoginEmail);
     const password = useSelector(getLoginPassword);
     const username = useSelector(getLoginUsername);
+    const isRegisterLoading = useSelector(getLoginIsLoading);
+    const registerError = useSelector(getLoginError);
+    const totalFileSize = useSelector(getTotalFileSize);
+    const currentlyFileUploaded = useSelector(getCurrentlyUploaded);
 
     const [currentPage, setCurrentPage] = useState<string>('first');
-    const [isPhotoLoading, setIsPhotoLoading] = useState<boolean>(false);
+    const [registerResult, setRegisterResult] = useState<string>('');
 
-    const nextTab = useCallback(() => {
-        const nextIndex = ['first', 'second', 'third'].indexOf(currentPage || '') + 1;
-        if (nextIndex < 3) {
-            setCurrentPage(['first', 'second', 'third'][nextIndex]);
-        }
-    }, [currentPage]);
+    const tabsNames: string[] = useMemo(() => ['first', 'second', 'third'], []);
 
-    const prevTab = useCallback(() => {
-        const nextIndex = ['first', 'second', 'third'].indexOf(currentPage || '') - 1;
+    const nextTab = useCallback((e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const nextIndex = tabsNames.indexOf(currentPage || '') + 1;
         if (nextIndex < 3) {
-            setCurrentPage(['first', 'second', 'third'][nextIndex]);
+            setCurrentPage(tabsNames[nextIndex]);
         }
-    }, [currentPage]);
+    }, [currentPage, tabsNames]);
 
     const changeFirstnameHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         dispatch(loginActions.setFirstname(e.target.value));
@@ -88,31 +98,44 @@ export const RegistrationForm = memo((props: RegistrationFormProps) => {
 
     const submitRegistration = useCallback(async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const formData = new FormData(e.currentTarget);
+        const file = new FormData(e.currentTarget);
 
-        formData.append('lastname', lastname);
-        formData.append('firstname', firstname);
-        formData.append('middlename', middlename);
-        formData.append('username', username);
-        formData.append('email', email);
-        formData.append('password', password);
+        file.append('userData', JSON.stringify({
+            lastname,
+            firstname,
+            middlename,
+            email,
+            username,
+            password,
+        }));
 
-        dispatch(registerUser(formData));
+        const result = await dispatch(registerUser(file));
+        if (result.meta.requestStatus === 'fulfilled') {
+            setRegisterResult('Регистрация успешна!');
+        }
     }, [dispatch, email, firstname, lastname, middlename, password, username]);
 
     return (
-        <DynamicModuleLoader reducers={initialReducers}>
+        <DynamicModuleLoader reducers={initialReducers} removeAfterUnmount={false}>
             <Tabs
                 activeKey={currentPage}
                 onSelect={(k) => setCurrentPage(k || '')}
                 variant="pills"
             >
-                <Tab eventKey="first" title="ФИО" disabled>
-                    <Form className={classes.form}>
+                <Tab
+                    eventKey="first"
+                    title="ФИО"
+                    disabled={!(tabsNames.indexOf('first') <= tabsNames.indexOf(currentPage))}
+                >
+                    <Form
+                        className={classes.form}
+                        onSubmit={nextTab}
+                    >
                         <InputGroup className="mb-3">
                             <InputGroup className="mb-3">
                                 <InputGroup.Text>Фамилия</InputGroup.Text>
                                 <Form.Control
+                                    autoFocus
                                     onChange={changeLastnameHandler}
                                     value={lastname}
                                     placeholder="Фамилия"
@@ -133,11 +156,18 @@ export const RegistrationForm = memo((props: RegistrationFormProps) => {
                                 placeholder="Отчество"
                             />
                         </InputGroup>
-                        <Button onClick={nextTab} variant="outline-success">Далее</Button>
+                        <Button type="submit" variant="success">Далее</Button>
                     </Form>
                 </Tab>
-                <Tab eventKey="second" title="Данные входа" disabled>
-                    <Form className={classes.form}>
+                <Tab
+                    eventKey="second"
+                    title="Данные входа"
+                    disabled={!(tabsNames.indexOf('second') <= tabsNames.indexOf(currentPage))}
+                >
+                    <Form
+                        onSubmit={nextTab}
+                        className={classes.form}
+                    >
                         <InputGroup className="mb-3">
                             <InputGroup.Text>Почта</InputGroup.Text>
                             <Form.Control
@@ -155,38 +185,98 @@ export const RegistrationForm = memo((props: RegistrationFormProps) => {
                                 type="password"
                             />
                         </InputGroup>
-                        <ButtonGroup>
-                            <Button onClick={prevTab} variant="outline-danger">Назад</Button>
-                            <Button onClick={nextTab} variant="outline-success">Далее</Button>
-                        </ButtonGroup>
+                        <Button type="submit" variant="success">Далее</Button>
                     </Form>
                 </Tab>
-                <Tab eventKey="third" title="ЛК" disabled>
+                <Tab
+                    eventKey="third"
+                    title="ЛК"
+                    disabled={!(tabsNames.indexOf('third') <= tabsNames.indexOf(currentPage))}
+                >
                     <Form
                         className={classes.form}
                         onSubmit={submitRegistration}
                         encType="multipart/form-data"
                     >
-                        <InputGroup className="mb-3">
-                            <InputGroup.Text>Юзернейм</InputGroup.Text>
-                            <Form.Control
-                                onChange={changeUsernameHandler}
-                                value={username}
-                                placeholder="Имя пользователя"
-                            />
-                        </InputGroup>
+                        {!isRegisterLoading && registerError && (
+                            <Alert variant="danger">{registerError}</Alert>
+                        )}
+                        {!isRegisterLoading && registerResult && (
+                            <Alert variant="success">{registerResult}</Alert>
+                        )}
+                        {!isRegisterLoading
+                            && !registerError
+                            && !registerResult && (
+                            <InputGroup className="mb-3">
+                                <InputGroup.Text>Юзернейм</InputGroup.Text>
+                                <Form.Control
+                                    onChange={changeUsernameHandler}
+                                    value={username}
+                                    placeholder="Имя пользователя"
+                                />
+                            </InputGroup>
+                        )}
                         <Form.Group controlId="formFile" className="mb-3">
-                            <Form.Label>Ваше фото</Form.Label>
-                            <Form.Control type="file" />
-                            {isPhotoLoading && (
-                                <ProgressBar animated now={45} />
+                            {!isRegisterLoading
+                                && !registerError
+                                && !registerResult && (
+                                <>
+                                    <Form.Label>Ваше фото</Form.Label>
+                                    <Form.Control
+                                        name="file"
+                                        type="file"
+                                    />
+                                </>
+                            )}
+                            {isRegisterLoading && (
+                                <ProgressBar
+                                    className={classes.bar}
+                                    animated
+                                    label={`${currentlyFileUploaded / totalFileSize * 100}%`}
+                                    now={currentlyFileUploaded / totalFileSize * 100}
+                                />
+                            )}
+                            {!isRegisterLoading && registerError && (
+                                <ProgressBar
+                                    className={classes.bar}
+                                    variant="danger"
+                                    label="Ошибка!"
+                                    now={100}
+                                />
                             )}
                         </Form.Group>
 
-                        <ButtonGroup>
-                            <Button onClick={prevTab} variant="outline-danger">Назад</Button>
-                            <Button type="submit">Submit</Button>
-                        </ButtonGroup>
+                        {isRegisterLoading
+                            ? (
+                                <Button variant="success" disabled>
+                                    <Spinner
+                                        className={classes.spinner}
+                                        as="span"
+                                        animation="border"
+                                        size="sm"
+                                        role="status"
+                                    />
+                                    Регистрация...
+                                </Button>
+                            )
+                            : registerResult
+                                ? (
+                                    <Button
+                                        variant="primary"
+                                        className={classes.link}
+                                        onClick={onRegisterSuccessful}
+                                    >
+                                        Войти
+                                    </Button>
+                                )
+                                : (
+                                    <Button
+                                        type="submit"
+                                        variant="success"
+                                    >
+                                        Регистрация
+                                    </Button>
+                                )}
                     </Form>
                 </Tab>
             </Tabs>

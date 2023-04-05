@@ -4,12 +4,15 @@ import { LoginSchema } from '../types/loginSchema';
 import { loginByUsername } from '../services/loginByUsername/loginByUsername';
 
 const initialState: LoginSchema = {
-    username: '',
-    password: '',
-    firstname: '',
-    lastname: '',
-    middlename: '',
-    email: '',
+    uploadProgress: { currentlyUploaded: 0, totalFileSize: 0 },
+    userData: {
+        username: '',
+        password: '',
+        firstname: '',
+        lastname: '',
+        middlename: '',
+        email: '',
+    },
     isLoading: false,
 };
 
@@ -18,22 +21,29 @@ export const loginSlice = createSlice({
     initialState,
     reducers: {
         setUsername: (state, action:PayloadAction<string>) => {
-            state.username = action.payload;
+            state.userData.username = action.payload;
         },
         setPassword: (state, action:PayloadAction<string>) => {
-            state.password = action.payload;
+            state.userData.password = action.payload;
         },
         setFirstname: (state, action: PayloadAction<string>) => {
-            state.firstname = action.payload;
+            state.userData.firstname = action.payload;
         },
         setLastname: (state, action: PayloadAction<string>) => {
-            state.lastname = action.payload;
+            state.userData.lastname = action.payload;
         },
         setMiddlename: (state, action: PayloadAction<string>) => {
-            state.middlename = action.payload;
+            state.userData.middlename = action.payload;
         },
         setEmail: (state, action: PayloadAction<string>) => {
-            state.email = action.payload;
+            state.userData.email = action.payload;
+        },
+
+        setTotalFileSize: (state, action: PayloadAction<number>) => {
+            state.uploadProgress.totalFileSize = action.payload;
+        },
+        setCurrentlyUploaded: (state, action: PayloadAction<number>) => {
+            state.uploadProgress.currentlyUploaded = action.payload;
         },
     },
     extraReducers: ((builder) => {

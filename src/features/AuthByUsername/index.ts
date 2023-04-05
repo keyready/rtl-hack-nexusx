@@ -6,8 +6,11 @@ export {
     getLoginFirstname,
     getLoginMiddlename,
     getLoginEmail,
+    getLoginPassword,
+    getLoginUsername,
 } from './model/selectors/getPersonalInfo/getPersonalInfo';
-export { getLoginError } from './model/selectors/getLoginError/getLoginError';
-export { getLoginIsLoading } from './model/selectors/getLoginIsLoading/getLoginIsLoading';
-export { getLoginPassword } from './model/selectors/getLoginPassword/getLoginPassword';
-export { getLoginUsername } from './model/selectors/getLoginUsername/getLoginUsername';
+export { getLoginError, getLoginIsLoading } from './model/selectors/getLoginStatus/getLoginStatus';
+export {
+    getTotalFileSize,
+    getCurrentlyUploaded,
+} from './model/selectors/getLoginUploadProgress/getLoginUploadProgress';

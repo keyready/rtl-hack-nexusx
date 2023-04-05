@@ -1,7 +1,6 @@
 const fs = require('fs');
 const jsonServer = require('json-server');
 const path = require('path');
-const express = require('express');
 
 const server = jsonServer.create();
 const PORT = 9999;
@@ -9,7 +8,6 @@ const router = jsonServer.router(path.resolve(__dirname, 'db.json'));
 
 server.use(jsonServer.defaults({}));
 server.use(jsonServer.bodyParser);
-server.use(express.json());
 
 // Нужно для небольшой задержки, чтобы запрос проходил не мгновенно, имитация реального апи
 // server.use(async (req, res, next) => {
@@ -21,8 +19,8 @@ server.use(express.json());
 
 // Эндпоинт для логина
 
-server.post('/upload', (req, res) => {
-    console.log(req.files);
+server.post('/register', (req, res) => {
+    console.log(req.file);
 
     return res.json({ message: 'угу' });
 });
@@ -49,7 +47,7 @@ server.post('/login', (req, res) => {
 // проверяем, авторизован ли пользователь
 // eslint-disable-next-line
 server.use((req, res, next) => {
-    if (!req.headers.authorization) {
+    if (req.url !== '/register' && !req.headers.authorization) {
         return res.status(403).json({ message: 'AUTH ERROR' });
     }
 

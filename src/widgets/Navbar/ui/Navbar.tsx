@@ -10,14 +10,20 @@ import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import { Avatar } from 'shared/UI/Avatar/Avatar';
 import { Dropdown } from 'shared/UI/Dropdown';
 import { HStack } from 'shared/UI/Stack';
-import { Button } from 'react-bootstrap';
+import { Button, ButtonGroup } from 'react-bootstrap';
 import classes from './Navbar.module.scss';
 
 export interface NavbarProps {
     className?: string
+    setShow?: (value: boolean) => void;
 }
 
-export const Navbar = memo(({ className }: NavbarProps) => {
+export const Navbar = memo((props: NavbarProps) => {
+    const {
+        className,
+        setShow,
+    } = props;
+
     const userData = useSelector(getUserAuthData);
     const isAdmin = useSelector(isUserAdmin);
     const isManager = useSelector(isUserManager);
@@ -28,11 +34,15 @@ export const Navbar = memo(({ className }: NavbarProps) => {
         setIsModalVisible(false);
     }, []);
     const onLogin = useCallback(() => {
+        setShow?.(false);
         setIsModalVisible(true);
-    }, []);
+    }, [setShow]);
     const onLogout = useCallback(() => {
         dispatch(userActions.logout());
     }, [dispatch]);
+    const onRegister = useCallback(() => {
+        setShow?.(true);
+    }, [setShow]);
 
     const isAdminPanelAvailable = isAdmin || isManager;
 
@@ -73,13 +83,21 @@ export const Navbar = memo(({ className }: NavbarProps) => {
 
     return (
         <div className={classNames(classes.Navbar, {}, [className])}>
-            <Button
-                variant="primary"
-                className={classes.link}
-                onClick={onLogin}
-            >
-                Войти
-            </Button>
+            <ButtonGroup className={classes.link}>
+                <Button
+                    variant="primary"
+                    onClick={onLogin}
+                >
+                    Войти
+                </Button>
+                <Button
+                    variant="outline-primary"
+                    onClick={onRegister}
+                >
+                    Регистрация
+                </Button>
+            </ButtonGroup>
+
             {isModalVisible && <LoginModal isOpen={isModalVisible} onClose={onCloseModal} />}
         </div>
     );

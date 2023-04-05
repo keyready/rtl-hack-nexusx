@@ -1,13 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'app/providers/StoreProvider/config/StateSchema';
-
-interface LoginByUsernameProps {
-    mail?: string;
-    firstname?: string;
-    lastname?: string;
-    middlename?: string;
-    password: string;
-}
+import { loginActions } from '../../slices/loginSlice';
 
 export const registerUser = createAsyncThunk<
     string,
@@ -15,10 +8,22 @@ export const registerUser = createAsyncThunk<
     ThunkConfig<string>>(
         'registration/registerUser',
         async (registerData, thunkAPI) => {
-            const { extra, rejectWithValue } = thunkAPI;
+            const { extra, rejectWithValue, dispatch } = thunkAPI;
 
             try {
-                const response = await extra.api.post<string>('/upload', registerData);
+                const response = await extra.api.post<string>(
+                    '/register',
+                    registerData,
+                    {
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                        },
+                        onUploadProgress: (progressEvent) => {
+                            dispatch(loginActions.setTotalFileSize(progressEvent.total));
+                            dispatch(loginActions.setCurrentlyUploaded(progressEvent.loaded));
+                        },
+                    },
+                );
 
                 if (!response.data) {
                     throw new Error();

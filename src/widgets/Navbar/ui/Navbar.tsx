@@ -153,6 +153,13 @@ export const Navbar = memo((props: NavbarProps) => {
                         },
                     ]}
                 />
+                <HStack max className={classes.bannerWrapper}>
+                    <img
+                        className={classes.banner}
+                        src="/static/images/main-banner.png"
+                        alt="Баннер"
+                    />
+                </HStack>
             </HStack>
         );
     }
@@ -180,7 +187,7 @@ export const Navbar = memo((props: NavbarProps) => {
             <HStack max className={classes.bannerWrapper}>
                 <img
                     className={classes.banner}
-                    src="static/images/main-banner.png"
+                    src="/static/images/main-banner.png"
                     alt="Баннер"
                 />
             </HStack>

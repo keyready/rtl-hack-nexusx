@@ -1,0 +1,64 @@
+.CustomerProfilePage {
+
+}
+
+.banner {
+    margin-bottom: 20px;
+    gap: 100px;
+}
+
+.avatar {
+    border: 5px solid red;
+    position: relative;
+}
+
+.verified {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    z-index: 6000;
+    transform: translateY(-100%);
+}
+
+.lvl1 {
+    border-color: darkgoldenrod;
+}
+
+.lvl2 {
+    border-color: silver;
+}
+
+.lvl3 {
+    border-color: gold;
+}
+
+.lvl4 {
+    border-color: deepskyblue;
+    animation: sparkle 4s ease-in-out infinite;
+}
+
+.tabs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.title {
+    margin-bottom: 30px;
+}
+
+@keyframes sparkle {
+    0% {
+        box-shadow: 0 0 10px 0 dodgerblue;
+    }
+
+    50% {
+        box-shadow: 0 0 20px 20px dodgerblue;
+    }
+
+    100% {
+        box-shadow: 0 0 10px 0 dodgerblue;
+    }
+
+}

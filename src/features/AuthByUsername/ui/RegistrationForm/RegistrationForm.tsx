@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 import {
     Alert,
-    Button, Form, InputGroup, ProgressBar, Spinner, Tab, Tabs,
+    Button, Form, FormGroup, InputGroup, ProgressBar, Spinner, Tab, Tabs,
 } from 'react-bootstrap';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useSelector } from 'react-redux';
@@ -69,6 +69,7 @@ export const RegistrationForm = memo((props: RegistrationFormProps) => {
     const [currentPage, setCurrentPage] = useState<string>('first');
     const [registerResult, setRegisterResult] = useState<string>('');
     const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+    const [validated, setValidated] = useState(false);
 
     const tabsNames: string[] = useMemo(() => ['first', 'second', 'third'], []);
 
@@ -80,6 +81,16 @@ export const RegistrationForm = memo((props: RegistrationFormProps) => {
             setCurrentPage(tabsNames[nextIndex]);
         }
     }, [currentPage, tabsNames]);
+    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+        const form = event.currentTarget;
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        setValidated(true);
+
+        nextTab(event);
+    };
 
     const changeFirstnameHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         dispatch(loginActions.setFirstname(e.target.value));
@@ -119,6 +130,14 @@ export const RegistrationForm = memo((props: RegistrationFormProps) => {
         }
     }, [dispatch, email, firstname, lastname, middlename, password, username]);
 
+    /**
+     *
+     *
+     *                                     onChange={changeMiddlenameHandler}
+     *                                     value={middlename}
+     *                                     placeholder="Отчество"
+     */
+
     return (
         <DynamicModuleLoader reducers={initialReducers} removeAfterUnmount={false}>
             <Tabs
@@ -132,34 +151,48 @@ export const RegistrationForm = memo((props: RegistrationFormProps) => {
                     disabled={!(tabsNames.indexOf('first') <= tabsNames.indexOf(currentPage))}
                 >
                     <Form
+                        noValidate
+                        validated={validated}
                         className={classes.form}
-                        onSubmit={nextTab}
+                        onSubmit={handleSubmit}
                     >
-                        <InputGroup className="mb-3">
-                            <InputGroup className="mb-3">
+
+                        <FormGroup>
+                            <InputGroup hasValidation>
                                 <InputGroup.Text>Фамилия</InputGroup.Text>
                                 <Form.Control
-                                    autoFocus
+                                    required
                                     onChange={changeLastnameHandler}
                                     value={lastname}
                                     placeholder="Фамилия"
                                 />
+                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                <Form.Control.Feedback
+                                    type="invalid"
+                                >
+                                    Введите
+                                </Form.Control.Feedback>
                             </InputGroup>
-                            <InputGroup.Text>Имя</InputGroup.Text>
-                            <Form.Control
-                                onChange={changeFirstnameHandler}
-                                value={firstname}
-                                placeholder="Имя"
-                            />
-                        </InputGroup>
-                        <InputGroup className="mb-3">
-                            <InputGroup.Text>Отчество</InputGroup.Text>
-                            <Form.Control
-                                onChange={changeMiddlenameHandler}
-                                value={middlename}
-                                placeholder="Отчество"
-                            />
-                        </InputGroup>
+                        </FormGroup>
+
+                        <FormGroup>
+                            <InputGroup hasValidation>
+                                <InputGroup.Text>Имя</InputGroup.Text>
+                                <Form.Control
+                                    required
+                                    onChange={changeFirstnameHandler}
+                                    value={firstname}
+                                    placeholder="Имя"
+                                />
+                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                <Form.Control.Feedback
+                                    type="invalid"
+                                >
+                                    Введите
+                                </Form.Control.Feedback>
+                            </InputGroup>
+                        </FormGroup>
+
                         <Button
                             className={classes.btn}
                             type="submit"
@@ -169,6 +202,7 @@ export const RegistrationForm = memo((props: RegistrationFormProps) => {
                         </Button>
                     </Form>
                 </Tab>
+
                 <Tab
                     eventKey="second"
                     title="Данные входа"

@@ -8,4 +8,4 @@ app.config.from_object('src.config.Config')
 cors=CORS(app)
 db.init_app(app)
 
-from src import provider,customer
+from src import provider,customer, task

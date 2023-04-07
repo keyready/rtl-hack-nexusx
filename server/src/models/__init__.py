@@ -1,13 +1,22 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import *
+from sqlalchemy.orm import relationship
 
 db=SQLAlchemy()
 
 def object_as_dict(obj):
     return {c.key: getattr(obj, c.key) for c in inspect(obj).mapper.column_attrs}
 
+customers_achievements = db.Table("customers_achievements",
+                                  db.Column('id',db.Integer,primary_key=True),
+                                  db.Column('achievement_id', db.Integer, db.ForeignKey('achievements.id')),
+                                  db.Column('customer_id', db.Integer, db.ForeignKey('customers.id'))
+                                )
+
 class Achievement(db.Model):
-    id = db.Column(db.String, primary_key = True)
+    __tablename__ = "achievements"
+    
+    id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String, nullable = False)
     description = db.Column(db.String, nullable = False)
     image = db.Column(db.String, nullable = False)
@@ -27,6 +36,8 @@ class Achievement(db.Model):
         return "<Customer %c>" % self.id
     
 class Task(db.Model):
+    __tablename__ = "tasks"
+
     id = db.Column(db.String, primary_key = True)
     title = db.Column(db.String, nullable = False)
     description = db.Column(db.String, nullable = False)
@@ -56,12 +67,11 @@ class Admin(db.Model):
         
     def __repr__(self):
         return "<Customer %c>" % self.id
-     
-           
+              
 class Customer(db.Model):
     __tablename__ = "customers"
     
-    id = db.Column(db.String, primary_key = True)
+    id = db.Column(db.Integer, primary_key = True)
     firstname = db.Column(db.String, nullable = False)
     middlename = db.Column(db.String, nullable = False)
     lastname = db.Column(db.String, nullable = False)
@@ -69,9 +79,9 @@ class Customer(db.Model):
     image = db.Column(db.String, nullable = False)
     email = db.Column(db.String, nullable = False)
     avatar = db.Column(db.String, nullable = False)
-    solvedTasks = db.Column(db.ARRAY)
+    solvedTasks = db.Column(db.ARRAY(db.Integer))
     activeTask = db.Column(db.Integer)
-    achievements = db.Column(db.ARRAY)
+    achievements = db.relationship('Achievement', secondary=customers_achievements, backref='posts')
     activeBadge = db.Column(db.Integer)
     isVip = db.Column(db.Integer)
     experience = db.Column(db.Boolean)

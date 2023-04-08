@@ -20,7 +20,8 @@ def create_db():
         
         db.drop_all()
         db.create_all()
-        db.session.add(Admin(username='admin',password='admin'))
+        db.session.add(Admin(username='valiko666',password='k0fanov36'))
+        db.session.add(Admin(username='brabus2022',password='brabus2022'))
         db.session.commit()
         
         logging.info('[+] База данных успешно создана. \n Входные данные добавлены.(1 администратор)')

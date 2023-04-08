@@ -8,10 +8,10 @@ def object_as_dict(obj):
     return {c.key: getattr(obj, c.key) for c in inspect(obj).mapper.column_attrs}
 
 customers_achievements = db.Table("customers_achievements",
-                                  db.Column('id',db.Integer,primary_key=True),
-                                  db.Column('achievement_id', db.Integer, db.ForeignKey('achievements.id')),
-                                  db.Column('customer_id', db.Integer, db.ForeignKey('customers.id'))
-                                )
+                                db.Column('id',db.Integer,primary_key=True),
+                                db.Column('achievement_id', db.Integer, db.ForeignKey('achievements.id')),
+                                db.Column('customer_id', db.Integer, db.ForeignKey('customers.id'))
+                            )
 
 class Achievement(db.Model):
     __tablename__ = "achievements"
@@ -33,7 +33,7 @@ class Achievement(db.Model):
         self.coinsConst = coinsConst 
             
     def __repr__(self):
-        return "<Customer %c>" % self.id
+        return "<Achievement %c>" % self.id
     
 class Task(db.Model):
     __tablename__ = "tasks"
@@ -53,11 +53,12 @@ class Task(db.Model):
         self.coinsConst = coinsConst 
             
     def __repr__(self):
-        return "<Customer %c>" % self.id
+        return "<Task %c>" % self.id
     
 class Admin(db.Model):
     __tablename__ = "admins"
-    id = db.Column(db.String, primary_key = True)
+
+    id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String, nullable = False)
     password = db.Column(db.String, nullable = False)
     
@@ -66,8 +67,8 @@ class Admin(db.Model):
         self.password = password
         
     def __repr__(self):
-        return "<Customer %c>" % self.id
-              
+        return "<Admin %c>" % self.id
+    
 class Customer(db.Model):
     __tablename__ = "customers"
     
@@ -77,16 +78,17 @@ class Customer(db.Model):
     lastname = db.Column(db.String, nullable = False)
     password = db.Column(db.String, nullable = False)
     image = db.Column(db.String, nullable = False)
-    email = db.Column(db.String, nullable = False)
+    email = db.Column(db.String, nullable = False,unique=True)
     avatar = db.Column(db.String, nullable = False)
     solvedTasks = db.Column(db.ARRAY(db.Integer))
     activeTask = db.Column(db.Integer)
-    achievements = db.relationship('Achievement', secondary=customers_achievements, backref='posts')
     activeBadge = db.Column(db.Integer)
     isVip = db.Column(db.Integer)
-    experience = db.Column(db.Boolean)
+    experience = db.Column(db.Integer)
     level= db.Column(db.Integer)
     balance= db.Column(db.Integer)
+
+    achievements = db.relationship('Achievement', secondary=customers_achievements, backref='posts')
     
     def __init__(self, firstname, middlename, lastname, password, image, email, avatar, solvedTasks, activeTask, achievements, activeBadge, isVip, experience, level, balance):       
         self.firstname =firstname
@@ -107,4 +109,19 @@ class Customer(db.Model):
 
     def __repr__(self):
         return "<Customer %c>" % self.id
-    
+
+class Vendor(db.Model):
+    __tablename__='vendors'
+
+    id=db.Column(db.Integer,primary_key=True)
+    name=db.Column(db.String,nullable=False,unique=True)
+    inn=db.Column(db.String,nullable=False,unique=True)
+    kpp=db.Column(db.String,nullable=False,unique=True)
+
+    def __init__(self,name,inn,kpp):
+        self.name = name
+        self.inn = inn
+        self.kpp = kpp
+
+    def __repr__(self):
+        return '<Vendor %v>' % self.name

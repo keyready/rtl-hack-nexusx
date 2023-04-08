@@ -29,7 +29,9 @@ def create_task(user_data):
                     task=Task(
                         title=body['title'],
                         description=body['description'],
-                        image=app.config['UPLOAD_FODER']+'/{}'.format(secure_filename(image.filename))
+                        image=app.config['UPLOAD_FODER']+'/{}'.format(secure_filename(image.filename)),
+                        expConst=body['expConst'],
+                        coinsConst=body['coinsCost'],
                         )
                     
                     image.save(task.image)

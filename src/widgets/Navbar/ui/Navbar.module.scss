@@ -35,18 +35,3 @@
 .links {
     display: flex;
 }
-
-.linksDropdown {
-    display: none;
-}
-
-@media (width <= 1100px) {
-    .links {
-        display: none;
-    }
-
-    .linksDropdown {
-        display: block;
-    }
-
-}

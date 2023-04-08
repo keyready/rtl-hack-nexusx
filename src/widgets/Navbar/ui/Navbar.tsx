@@ -7,15 +7,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
     getUserAuthData, isUserAdmin, isUserManager, userActions,
 } from 'entities/User';
-import { RoutePath } from 'shared/config/routeConfig/routeConfig';
+import { RoutePath, routerConfig } from 'shared/config/routeConfig/routeConfig';
 import { Avatar } from 'shared/UI/Avatar/Avatar';
 import { Dropdown } from 'shared/UI/Dropdown';
 import { HStack, VStack } from 'shared/UI/Stack';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { AppLink } from 'shared/UI/AppLink';
 import { AppLinkTheme } from 'shared/UI/AppLink/ui/AppLink';
-import { Icon } from 'shared/UI/Icon/Icon';
-import MenuOpen from 'shared/assets/icons/menu-open.svg';
+import { useNavigate } from 'react-router-dom';
 import classes from './Navbar.module.scss';
 
 export interface NavbarProps {
@@ -28,6 +27,8 @@ export const Navbar = memo((props: NavbarProps) => {
         className,
         setShow,
     } = props;
+
+    const navigate = useNavigate();
 
     const userData = useSelector(getUserAuthData);
     const isAdmin = useSelector(isUserAdmin);
@@ -46,42 +47,14 @@ export const Navbar = memo((props: NavbarProps) => {
         dispatch(userActions.logout());
     }, [dispatch]);
     const onRegister = useCallback(() => {
-        setShow?.(true);
-    }, [setShow]);
+        navigate(RoutePath.register_page);
+    }, [navigate]);
 
     const content = useMemo(() => (
         <>
             <img
                 src="/static/images/ret-logo-header.svg"
                 alt="Лого"
-            />
-
-            <Dropdown
-                className={classes.linksDropdown}
-                direction="bottom right"
-                trigger={(
-                    <HStack gap="32">
-                        <h2>Меню</h2>
-                        <Icon Svg={MenuOpen} />
-                    </HStack>
-                )}
-                items={[
-                    {
-                        content: 'Торги', href: '/about',
-                    },
-                    {
-                        content: 'Услуги и сервисы', href: '#',
-                    },
-                    {
-                        content: 'Удостоверяющий центр', href: '#',
-                    },
-                    {
-                        content: 'Клиентам', href: '#',
-                    },
-                    {
-                        content: 'О площадке', href: '#',
-                    },
-                ]}
             />
 
             <HStack
@@ -131,28 +104,33 @@ export const Navbar = memo((props: NavbarProps) => {
 
     if (userData?.id) {
         return (
-            <HStack justify="between" className={classNames(classes.Navbar, {}, [className])}>
-                {content}
+            <VStack gap="0">
+                <HStack
+                    justify="between"
+                    className={classNames(classes.Navbar, {}, [className])}
+                >
+                    {content}
 
-                <Dropdown
-                    direction="bottom left"
-                    trigger={<Avatar src={userData.avatar} size={40} />}
-                    items={[
-                        ...(isAdminPanelAvailable
-                            ? [{
-                                content: 'Админка',
-                                href: RoutePath.admin_panel,
-                            }] : []),
-                        {
-                            content: 'Профиль',
-                            href: 'ссылка до профиля',
-                        },
-                        {
-                            content: 'Выйти',
-                            onClick: onLogout,
-                        },
-                    ]}
-                />
+                    <Dropdown
+                        direction="bottom left"
+                        trigger={<Avatar src={userData.avatar} size={40} />}
+                        items={[
+                            ...(isAdminPanelAvailable
+                                ? [{
+                                    content: 'Админка',
+                                    href: RoutePath.admin_panel,
+                                }] : []),
+                            {
+                                content: 'Профиль',
+                                href: RoutePath.customer_profile + userData.id,
+                            },
+                            {
+                                content: 'Выйти',
+                                onClick: onLogout,
+                            },
+                        ]}
+                    />
+                </HStack>
                 <HStack max className={classes.bannerWrapper}>
                     <img
                         className={classes.banner}
@@ -160,7 +138,7 @@ export const Navbar = memo((props: NavbarProps) => {
                         alt="Баннер"
                     />
                 </HStack>
-            </HStack>
+            </VStack>
         );
     }
 

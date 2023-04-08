@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserAuthData, getUserInited, userActions } from 'entities/User';
 import { RegistrationForm } from 'features/AuthByUsername';
 import { Sidebar } from 'shared/UI/Sidebar';
+import { updateUserData } from 'entities/User/model/services/updateUserData';
 
 export const App = () => {
     const { theme } = useTheme();

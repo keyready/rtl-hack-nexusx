@@ -189,8 +189,11 @@
   ],
   "users": [
     {
+      "id": 1,
       "password": "123",
-      "username": "keyready"
+      "username": "keyready",
+      "avatar": "https://i.pravatar.cc/300",
+      "roles": ["ADMIN"]
     }
   ]
 }

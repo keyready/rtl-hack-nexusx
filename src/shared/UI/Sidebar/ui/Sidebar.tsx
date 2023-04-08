@@ -33,7 +33,7 @@ export const Sidebar = memo((props: SidebarProps) => {
             <Offcanvas.Header
                 className={classes.header}
             >
-                <img src="static/images/ret-logo.svg" />
+                <img src="/static/images/ret-logo.svg" />
             </Offcanvas.Header>
 
             <Offcanvas.Body>

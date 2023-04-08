@@ -2,9 +2,7 @@ import { Page } from 'widgets/Page/Page';
 
 const MainPage = () => (
     <Page>
-        <h1>
-            ГЛАВНАЯ СТРАНИЦА
-        </h1>
+        <h2>главная</h2>
     </Page>
 );
 

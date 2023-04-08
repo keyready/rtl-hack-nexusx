@@ -18,6 +18,12 @@ server.use(jsonServer.bodyParser);
 // });
 
 // Эндпоинт для логина
+
+server.post('/register', (req, res) => {
+    console.log(req.file);
+
+    return res.json({ message: 'угу' });
+});
 server.post('/login', (req, res) => {
     try {
         const { username, password } = req.body;
@@ -41,7 +47,7 @@ server.post('/login', (req, res) => {
 // проверяем, авторизован ли пользователь
 // eslint-disable-next-line
 server.use((req, res, next) => {
-    if (!req.headers.authorization) {
+    if (req.url !== '/register' && !req.headers.authorization) {
         return res.status(403).json({ message: 'AUTH ERROR' });
     }
 

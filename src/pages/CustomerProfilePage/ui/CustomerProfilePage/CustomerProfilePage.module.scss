@@ -1,0 +1,11 @@
+.tabs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font: var(--font-l);
+    margin-bottom: 20px;
+}
+
+.title {
+    margin-bottom: 30px;
+}

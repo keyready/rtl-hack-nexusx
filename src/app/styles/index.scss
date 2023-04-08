@@ -3,7 +3,6 @@
 @import "./themes/normal";
 @import "./themes/dark";
 @import "./themes/custom";
-@import "~bootstrap/scss/bootstrap";
 
 .app,
 .app_modal {
@@ -12,11 +11,13 @@
 }
 
 .app {
-    background: var(--bg-color);
+    background: linear-gradient(180deg, #c4e0ff 30%, rgb(2 31 87 / 0%) 100%);
     min-height: 100vh;
 }
 
 .page {
+    width: 100%;
+    padding: 0 110px;
     display: flex;
 }
 

@@ -6,6 +6,8 @@ interface AvatarProps {
     className?: string;
     src?: string;
     size?: number;
+    width?: number;
+    height?: number;
     alt?: string;
     rounded?: number;
 }
@@ -15,15 +17,17 @@ export const Avatar = (props: AvatarProps) => {
         className,
         src,
         size,
+        height,
+        width,
         alt,
         rounded,
     } = props;
 
     const styles = useMemo<CSSProperties>(() => ({
-        width: size || 100,
-        height: size || 100,
+        width: size || width || 100,
+        height: size || height || 100,
         borderRadius: `${rounded}%` || '50%',
-    }), [size, rounded]);
+    }), [size, width, height, rounded]);
 
     return (
         <img

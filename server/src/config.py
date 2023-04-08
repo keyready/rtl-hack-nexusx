@@ -6,8 +6,14 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI='postgresql://k0fanov36:k0fanov36@localhost:5432/rlt'# <- CHANGE THIS
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    #TODO Конфиги json
+    UPLOAD_FOLDER='/server/src/static/img'
+
+    ############ Конфиги json #########
     JSONIFY_PRETTYPRINT_REGULAR = False
     JSON_SORT_KEYS = False
     JSON_AS_ASCII = False
+
+    ############ Конфиги JWT ###########
+    JWT_ACCESS_SECRET_KEY=os.environ('JWT_ACCESS_SECRET_KEY','')
+
 

@@ -3,7 +3,7 @@ from sqlalchemy_utils import database_exists
 from sqlalchemy import create_engine,inspect
 
 from src import app
-from src.models import db
+from src.models import db,Admin
 
 import shutil,os,logging
 
@@ -20,10 +20,11 @@ def create_db():
         
         db.drop_all()
         db.create_all()
+        db.session.add(Admin(username='admin',password='admin'))
         db.session.commit()
         
-        logging.info('[+] База данных успешно создана. \n Входные данные добавлены.')
-        print('[+] База данных успешно создана. \n Входные данные добавлены.')
+        logging.info('[+] База данных успешно создана. \n Входные данные добавлены.(1 администратор)')
+        print('[+] База данных успешно создана. \n Входные данные добавлены. 1 (администратор)')
     
     else:
         logging.warning('[-] База данных на данный момент не пустая.')

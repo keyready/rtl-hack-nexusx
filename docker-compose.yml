@@ -1,0 +1,45 @@
+version: "3.3"
+
+services:
+  backend:
+    container_name: backend
+    build: ./server
+    #command: ['sh', '-c', 'python3 manage.py create_db && gunicorn --bind 0.0.0.0:5000 manage:app']
+    command: gunicorn --bind 0.0.0.0:5000 manage:app --reload --timeout 90 # dev version
+    restart: always
+    volumes:
+      - ./server:/backend
+##  FOR REACT  ##      - ./server/
+    ports:
+      - 5000:5000
+    networks:
+      - custom_network_hackathon
+    depends_on:
+      - database
+
+  database:
+    container_name: database
+    image: postgres:15-alpine
+    restart: always
+    ports:
+      - 5432:5432
+    env_file:
+      - ./.env.db
+    networks:
+      - custom_network_hackathon
+
+  nginx:
+    container_name: nginx
+    restart: always
+    build: ./nginx
+    volumes: 
+      - ./server/src/static:/static
+    ports:
+      - 80:80
+    networks:
+      - custom_network_hackathon
+
+  networks:
+    custom_network_hackathon:
+      driver: bridge
+      name: custom_network_hackathon

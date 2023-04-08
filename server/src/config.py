@@ -1,12 +1,14 @@
 import os
 
-class Config(object):
-    SECRET_KEY='qc8BhapYxRGr5gLrX-x2K9bbGXHtmhlgiPhK1PT_w6,EMvTv3n'
 
-    SQLALCHEMY_DATABASE_URI='postgresql://k0fanov36:k0fanov36@localhost:5432/rlt'# <- CHANGE THIS
+class Config(object):
+    SECRET_KEY = 'qc8BhapYxRGr5gLrX-x2K9bbGXHtmhlgiPhK1PT_w6,EMvTv3n'
+
+    # <- CHANGE THIS
+    SQLALCHEMY_DATABASE_URI = 'postgresql://k0fanov36:k0fanov36@localhost:5432/rlt'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    UPLOAD_FOLDER='/server/src/static/img'
+    UPLOAD_FOLDER = '/server/src/static/img'
 
     ############ Конфиги json #########
     JSONIFY_PRETTYPRINT_REGULAR = False
@@ -14,6 +16,4 @@ class Config(object):
     JSON_AS_ASCII = False
 
     ############ Конфиги JWT ###########
-    JWT_ACCESS_SECRET_KEY=os.environ.get('JWT_ACCESS_SECRET_KEY','')
-
-
+    JWT_ACCESS_SECRET_KEY = os.environ.get('JWT_ACCESS_SECRET_KEY', '')

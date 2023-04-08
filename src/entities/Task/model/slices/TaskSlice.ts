@@ -1,4 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { startTask } from '../services/startTask';
+import { abortTask } from '../services/abortTask';
 import { TaskSchema } from '../types/TaskSchema';
 
 const initialState: TaskSchema = {
@@ -15,20 +17,32 @@ export const TaskSlice = createSlice({
 
         },
     },
-    // extraReducers: (builder) => {
-    //     builder
-    //         .addCase(, (state) => {
-    //             state.error = undefined;
-    //             state.isLoading = true;
-    //         })
-    //         .addCase(, (state) => {
-    //             state.isLoading = false;
-    //         })
-    //         .addCase(, (state, action) => {
-    //             state.isLoading = false;
-    //             state.error = action.payload;
-    //         });
-    // },
+    extraReducers: (builder) => {
+        builder
+            .addCase(startTask.pending, (state) => {
+                state.error = undefined;
+                state.isLoading = true;
+            })
+            .addCase(startTask.fulfilled, (state) => {
+                state.isLoading = false;
+            })
+            .addCase(startTask.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+            })
+
+            .addCase(abortTask.pending, (state) => {
+                state.error = undefined;
+                state.isLoading = true;
+            })
+            .addCase(abortTask.fulfilled, (state) => {
+                state.isLoading = false;
+            })
+            .addCase(abortTask.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+            });
+    },
 });
 
 export const { actions: TaskActions } = TaskSlice;

@@ -1,4 +1,4 @@
-export { CustomerCard } from './ui/Customer/CustomerCard';
+export { CustomerCard } from './ui/CustomerCard/CustomerCard';
 export type { CustomerSchema, Customer } from './model/types/CustomerSchema';
 export {
     fetchCustomer,

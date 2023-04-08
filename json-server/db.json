@@ -26,9 +26,45 @@
       "userRate": 11,
       "expCost": 4000,
       "coinsCost": 1000
+    },
+    {
+      "id": 4,
+      "title": "Горшочек с золотом",
+      "description": "Совершите покупку на 300 000 разовым платежом",
+      "image": "https://i.pravatar.cc/300",
+      "userRate": 45,
+      "expCost": 4000,
+      "coinsCost": 1750
+    },
+    {
+      "id": 5,
+      "title": "Финансирование госдепа",
+      "description": "Пополните баланс на 5 000 рублей",
+      "image": "https://i.pravatar.cc/300",
+      "userRate": 10,
+      "expCost": 4000,
+      "coinsCost": 1000
+    },
+    {
+      "id": 6,
+      "title": "Юный комментатор",
+      "description": "Напишите свой первый отзыв",
+      "image": "https://i.pravatar.cc/300",
+      "userRate": 61,
+      "expCost": 2500,
+      "coinsCost": 1250
+    },
+    {
+      "id": 7,
+      "title": "Кот в мешке",
+      "description": "Откажитесь от полученного заказа",
+      "image": "https://i.pravatar.cc/300",
+      "userRate": 23,
+      "expCost": 2000,
+      "coinsCost": 750
     }
   ],
-  "customer": [
+  "customers": [
     {
       "id": 1,
       "lastname": "Корчак",
@@ -37,14 +73,72 @@
       "username": "keyready",
       "email": "dallss13@bk.ru",
       "avatar": "https://i.pravatar.cc/200",
-      "solvedTasks": "",
-      "activeTask": 2,
-      "achievements": [2],
+      "solvedTasks": [1, 4],
+      "activeTask": 5,
+      "achievements": [2, 5, 6],
       "activeBadge": "",
       "isVip": true,
       "experience": 780,
-      "level": "lvl2",
+      "level": "lvl4",
       "balance": 3200
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Посмотреть тематический вебинар",
+      "description": "Перейдите в раздел \"Вебинары\" и посмотрите любой вебинар по теме закупок",
+      "image": "https://i.pravatar.cc/300",
+      "expCost": "500",
+      "coinsCost": "500"
+    },
+    {
+      "id": 2,
+      "title": "Посмотреть тематический вебинар",
+      "description": "Перейдите в раздел \"Вебинары\" и посмотрите любой вебинар по теме закупок",
+      "image": "https://i.pravatar.cc/300",
+      "expCost": "500",
+      "coinsCost": "500"
+    },
+    {
+      "id": 3,
+      "title": "Посмотреть тематический вебинар",
+      "description": "Перейдите в раздел \"Вебинары\" и посмотрите любой вебинар по теме закупок",
+      "image": "https://i.pravatar.cc/300",
+      "expCost": "500",
+      "coinsCost": "500"
+    },
+    {
+      "id": 4,
+      "title": "Посмотреть тематический вебинар",
+      "description": "Перейдите в раздел \"Вебинары\" и посмотрите любой вебинар по теме закупок",
+      "image": "https://i.pravatar.cc/300",
+      "expCost": "500",
+      "coinsCost": "500"
+    },
+    {
+      "id": 5,
+      "title": "Посмотреть тематический вебинар",
+      "description": "Перейдите в раздел \"Вебинары\" и посмотрите любой вебинар по теме закупок",
+      "image": "https://i.pravatar.cc/300",
+      "expCost": "500",
+      "coinsCost": "500"
+    },
+    {
+      "id": 6,
+      "title": "Посмотреть тематический вебинар",
+      "description": "Перейдите в раздел \"Вебинары\" и посмотрите любой вебинар по теме закупок",
+      "image": "https://i.pravatar.cc/300",
+      "expCost": "500",
+      "coinsCost": "500"
+    },
+    {
+      "id": 7,
+      "title": "Посмотреть тематический вебинар",
+      "description": "Перейдите в раздел \"Вебинары\" и посмотрите любой вебинар по теме закупок",
+      "image": "https://i.pravatar.cc/300",
+      "expCost": "500",
+      "coinsCost": "500"
     }
   ],
   "users": [

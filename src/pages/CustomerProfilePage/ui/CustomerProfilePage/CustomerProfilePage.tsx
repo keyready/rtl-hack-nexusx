@@ -2,7 +2,9 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { Page } from 'widgets/Page/Page';
 import { memo, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { CustomerReducer, fetchCustomer, getCustomerData } from 'entities/Customer';
+import {
+    CustomerCard, CustomerReducer, fetchCustomer, getCustomerData,
+} from 'entities/Customer';
 import { AchievementReducer } from 'entities/Achievement';
 import {
     DynamicModuleLoader,
@@ -10,13 +12,9 @@ import {
 } from 'shared/lib/DynamicModuleLoader/DynamicModuleLoader';
 import { Tab, Tabs } from 'react-bootstrap';
 import { ContentWrapper } from 'shared/UI/ContentWrapper';
-import { Avatar } from 'shared/UI/Avatar/Avatar';
-import { HStack } from 'shared/UI/Stack';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useSelector } from 'react-redux';
-import { Text, TextSize } from 'shared/UI/Text';
-import { Icon } from 'shared/UI/Icon/Icon';
-import VerifiedIcon from 'shared/assets/icons/verified.svg';
+import { TasksList } from '../TasksList/TasksList';
 import { AchievementsList } from '../AchievementsList/AchievementsList';
 import classes from './CustomerProfilePage.module.scss';
 
@@ -28,8 +26,6 @@ const reducers: ReducersList = {
     achievement: AchievementReducer,
     customer: CustomerReducer,
 };
-
-type avatarLvl = 'lvl1' | 'lvl2' | 'lvl3' | 'lvl4'
 
 const CustomerProfilePage = memo((props: CustomerProfilePageProps) => {
     const {
@@ -47,59 +43,10 @@ const CustomerProfilePage = memo((props: CustomerProfilePageProps) => {
         }
     }, [dispatch, id]);
 
-    const avatarLvlMapper: Record<avatarLvl, string> = {
-        lvl1: classes.lvl1,
-        lvl2: classes.lvl2,
-        lvl3: classes.lvl3,
-        lvl4: classes.lvl4,
-    };
-
-    const lvlClasses = [];
-    if (customer?.level) {
-        lvlClasses.push(avatarLvlMapper[customer.level]);
-    }
-
     return (
         <DynamicModuleLoader reducers={reducers}>
             <Page className={classNames(classes.CustomerProfilePage, {}, [className])}>
-                <HStack
-                    justify="start"
-                    className={classes.banner}
-                    max
-                >
-                    {customer?.level === 'lvl4' && (
-                        <Icon
-                            className={classes.verified}
-                            Svg={VerifiedIcon}
-                        />
-                    )}
-                    <Avatar
-                        className={
-                            classNames(classes.avatar, {}, lvlClasses)
-                        }
-                        src="https://i.pravatar.cc/300"
-                        size={150}
-                        rounded={50}
-                    />
-
-                    <Text
-                        size={TextSize.L}
-                        title={customer?.lastname}
-                        text={`${customer?.firstname} ${customer?.middlename}`}
-                    />
-
-                    <Text
-                        size={TextSize.L}
-                        title="Баланс"
-                        text={`${customer?.balance}`}
-                    />
-
-                    <Text
-                        size={TextSize.L}
-                        title="Опыт"
-                        text={`${customer?.experience}`}
-                    />
-                </HStack>
+                <CustomerCard customer={customer} />
 
                 <ContentWrapper>
                     <Tabs
@@ -118,7 +65,7 @@ const CustomerProfilePage = memo((props: CustomerProfilePageProps) => {
                             title="Задачи"
                         >
                             <h1 className={classes.title}>Задачи</h1>
-                            <h3>Задачи</h3>
+                            <TasksList />
                         </Tab>
                         <Tab
                             eventKey="marketplace"

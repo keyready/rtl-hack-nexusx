@@ -1,22 +1,28 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'app/providers/StoreProvider/config/StateSchema';
-import { Customer } from '../types/CustomerSchema';
 
-export const fetchCustomer = createAsyncThunk<
-    Customer,
-    number,
+interface AbortTaskProps {
+    customerId?: number;
+    taskId?: number
+}
+
+export const abortTask = createAsyncThunk<
+    string,
+    AbortTaskProps,
     ThunkConfig<string>
 >(
-    'fetchCustomer/fetchCustomer',
-    async (CustomerID, thunkAPI) => {
+    'abortTask$/abortTask',
+    async (props, thunkAPI) => {
         const {
             extra,
             rejectWithValue,
-            dispatch,
         } = thunkAPI;
 
         try {
-            const response = await extra.api.get<Customer>(`/customers/${CustomerID}`);
+            const response = await extra.api.post<string>(
+                '/abort_task',
+                props,
+            );
 
             if (!response.data) {
                 throw new Error();

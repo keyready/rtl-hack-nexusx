@@ -1,8 +1,12 @@
 .AchievementCard {
-    position: relative;
+    width: 100%;
     padding: 10px 20px;
     border-radius: 25px;
     background: #fff;
+    display: grid;
+    grid-template-columns: 3fr 2fr 1fr;
+    grid-gap: 30px;
+    position: relative;
     box-shadow:
         0 28px 80px rgb(0 0 0 / 5.06%),
         0 11.6977px 33.4221px rgb(0 0 0 / 7.27%),
@@ -48,4 +52,3 @@ p {
     margin: 0;
     padding: 0;
 }
-

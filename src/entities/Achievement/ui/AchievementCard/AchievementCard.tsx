@@ -19,8 +19,6 @@ interface AchievementProps {
 export const AchievementCard = memo((props: AchievementProps) => {
     const { className, achievement } = props;
 
-    const dispatch = useAppDispatch();
-
     const customer = useSelector(getCustomerData);
 
     if (!achievement?.id) {
@@ -38,9 +36,7 @@ export const AchievementCard = memo((props: AchievementProps) => {
     };
 
     return (
-        <HStack
-            max
-            justify="between"
+        <div
             className={classNames(classes.AchievementCard, mods, [className])}
         >
             {isCompleted && (
@@ -48,12 +44,12 @@ export const AchievementCard = memo((props: AchievementProps) => {
             )}
             <HStack justify="start">
                 <img className={classes.img} src={achievement.image} alt={achievement.title} />
-                <VStack>
+                <VStack justify="between">
                     <Text title={achievement.title} text={achievement.description} />
                 </VStack>
             </HStack>
 
-            <VStack>
+            <VStack align="center">
                 <Text className={classes.costTitle} title="За выполнение" />
                 <HStack max justify="between">
                     <Text
@@ -69,10 +65,12 @@ export const AchievementCard = memo((props: AchievementProps) => {
                 </HStack>
             </VStack>
 
-            <Text
-                className={classes.stats}
-                title={`Это достижение есть у \n ${achievement.userRate}% пользователей`}
-            />
-        </HStack>
+            <VStack justify="center" align="center">
+                <Text
+                    className={classes.stats}
+                    title={`Это достижение есть у \n ${achievement.userRate}% пользователей`}
+                />
+            </VStack>
+        </div>
     );
 });

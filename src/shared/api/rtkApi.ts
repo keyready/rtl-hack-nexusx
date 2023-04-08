@@ -10,6 +10,8 @@ export const rtkApi = createApi({
             if (token) {
                 headers.set('Authorization', token);
             }
+            headers.set('Accept', 'application/json');
+            headers.set('Content-Type', 'application/json;charset=utf-8'); // настройка кодировки
             return headers;
         },
     }),

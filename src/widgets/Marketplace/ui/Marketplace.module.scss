@@ -1,0 +1,28 @@
+.Marketplace {
+    position: relative;
+}
+
+.productsPlace {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.filters {
+    padding: 20px;
+    border-radius: 25px;
+    background: #c4e0ff;
+    font: var(--font-l);
+    position: sticky;
+    top: -20px;
+    left: -20px;
+    min-width: 350px;
+    min-height: 350px;
+    box-shadow: 10px 10px 10px rgb(0 65 203 / 50%);
+}
+
+.input {
+    padding: 5px 10px;
+    font: var(--font-l);
+    margin-bottom: 20px;
+}

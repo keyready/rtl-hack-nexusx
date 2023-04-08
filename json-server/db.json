@@ -73,14 +73,23 @@
       "username": "keyready",
       "email": "dallss13@bk.ru",
       "avatar": "https://i.pravatar.cc/200",
-      "solvedTasks": [1, 4],
-      "activeTask": 5,
-      "achievements": [2, 5, 6],
-      "activeBadge": "",
+      "solvedTasks": [
+        1,
+        4
+      ],
+      "activeTask": 3,
+      "achievements": [
+        2,
+        5,
+        6
+      ],
       "isVip": true,
       "experience": 780,
       "level": "lvl4",
-      "balance": 3200
+      "balance": 3200,
+      "availableBadges": [1, 3, 4],
+      "boughtBadges": [2],
+      "activeBadge": null
     }
   ],
   "tasks": [
@@ -139,6 +148,43 @@
       "image": "https://i.pravatar.cc/300",
       "expCost": "500",
       "coinsCost": "500"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "title": "Бейдж \"Мамкин миллионер\"",
+      "cost": 1000,
+      "image": "http://i.pravatar.cc/300",
+      "type": "custom"
+    },
+    {
+      "id": 2,
+      "title": "Бейдж \"Начинающий торгаш\"",
+      "cost": 1000,
+      "image": "http://i.pravatar.cc/300",
+      "type": "custom"
+    },
+    {
+      "id": 3,
+      "title": "Бейдж \"Горшочек с золотом\"",
+      "cost": 1000,
+      "image": "http://i.pravatar.cc/300",
+      "type": "custom"
+    },
+    {
+      "id": 4,
+      "title": "Бейдж \"Один в поле заказчик\"",
+      "cost": 1000,
+      "image": "http://i.pravatar.cc/300",
+      "type": "custom"
+    },
+    {
+      "id": 5,
+      "title": "Бейдж \"ММыш ( кродеться )\"",
+      "cost": 1000,
+      "image": "http://i.pravatar.cc/300",
+      "type": "custom"
     }
   ],
   "users": [

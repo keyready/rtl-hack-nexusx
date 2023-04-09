@@ -85,7 +85,7 @@ export const CustomerCard = memo((props: CustomerProps) => {
                 className={
                     classNames(classes.avatar, {}, lvlClasses)
                 }
-                src="https://i.pravatar.cc/300"
+                src={customer?.avatar}
                 size={150}
                 rounded={50}
             />

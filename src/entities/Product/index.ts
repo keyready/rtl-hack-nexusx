@@ -5,3 +5,5 @@ export {
     getProductError,
     getProductIsLoading,
 } from './model/selectors/getProductData';
+export { createProduct } from './model/services/createProduct';
+export { deleteProduct } from './model/services/deleteProduct';

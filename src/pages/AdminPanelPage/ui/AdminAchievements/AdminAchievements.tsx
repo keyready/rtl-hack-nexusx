@@ -96,6 +96,5 @@ export const AdminAchievements = memo((props: AdminAchievementsProps) => {
                 </VStack>
             </ContentWrapper>
         </VStack>
-
     );
 });

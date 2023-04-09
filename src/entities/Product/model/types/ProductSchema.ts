@@ -1,7 +1,7 @@
 export interface Product {
     id?: number;
     title?: string;
-    cost?: number;
+    coinsCost?: number;
     image?: string;
     type?: 'all' | 'custom' | 'vip' | 'stat';
 }

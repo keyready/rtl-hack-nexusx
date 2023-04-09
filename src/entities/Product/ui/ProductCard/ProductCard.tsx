@@ -96,7 +96,7 @@ export const ProductCard = memo((props: ProductCardProps) => {
                 />
                 <Text
                     title={product?.title}
-                    text={`${product?.cost} RCoins`}
+                    text={`${product?.coinsCost} RCoins`}
                     size={TextSize.M}
                 />
             </HStack>

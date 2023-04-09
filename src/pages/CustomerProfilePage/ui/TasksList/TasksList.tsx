@@ -15,9 +15,7 @@ export const TasksList = memo((props: TasksListProps) => {
         className,
     } = props;
 
-    const { data: tasks, isLoading, isError } = useTasks(1, {
-        pollingInterval: 3000,
-    });
+    const { data: tasks, isLoading, isError } = useTasks(1);
 
     if (isError) {
         return (

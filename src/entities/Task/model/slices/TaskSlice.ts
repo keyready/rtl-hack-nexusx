@@ -1,4 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createTask } from '../services/createTask';
+import { deleteTask } from '../services/deleteTask';
 import { startTask } from '../services/startTask';
 import { abortTask } from '../services/abortTask';
 import { TaskSchema } from '../types/TaskSchema';
@@ -39,6 +41,30 @@ export const TaskSlice = createSlice({
                 state.isLoading = false;
             })
             .addCase(abortTask.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+            })
+
+            .addCase(createTask.pending, (state) => {
+                state.error = undefined;
+                state.isLoading = true;
+            })
+            .addCase(createTask.fulfilled, (state) => {
+                state.isLoading = false;
+            })
+            .addCase(createTask.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+            })
+
+            .addCase(deleteTask.pending, (state) => {
+                state.error = undefined;
+                state.isLoading = true;
+            })
+            .addCase(deleteTask.fulfilled, (state) => {
+                state.isLoading = false;
+            })
+            .addCase(deleteTask.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
             });

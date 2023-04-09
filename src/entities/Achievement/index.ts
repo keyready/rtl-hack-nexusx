@@ -6,3 +6,5 @@ export {
     getAchievementIsLoading,
 } from './model/selectors/getAchievementData';
 export { AchievementCard } from './ui/AchievementCard/AchievementCard';
+export { createAchievement } from './model/services/createAchievement';
+export { deleteAchievement } from './model/services/deleteAchievement';

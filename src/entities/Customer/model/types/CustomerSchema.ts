@@ -10,6 +10,8 @@ export interface Customer {
     activeTask?: number; // текущий таск для выполнения
     achievements?: number[]; // полученные достижения
     activeBadge?: number; // активный бейдж для отображения
+    availableBadges?: number[]; // бейджики доступные для покупки в магазине
+    boughtBadges?: number[]; // купленные бейджики
     isVip?: boolean; // есть випка?
     experience?: number; // количество очков опыта (допустим, каждый уровень - 1000 очков)
     level?: 'lvl1' | 'lvl2' | 'lvl3' | 'lvl4'; // уровень аккаунта

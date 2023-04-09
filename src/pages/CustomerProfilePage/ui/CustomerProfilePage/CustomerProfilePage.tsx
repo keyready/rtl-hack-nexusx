@@ -14,6 +14,7 @@ import { Tab, Tabs } from 'react-bootstrap';
 import { ContentWrapper } from 'shared/UI/ContentWrapper';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useSelector } from 'react-redux';
+import { Marketplace } from 'widgets/Marketplace';
 import { TasksList } from '../TasksList/TasksList';
 import { AchievementsList } from '../AchievementsList/AchievementsList';
 import classes from './CustomerProfilePage.module.scss';
@@ -72,7 +73,13 @@ const CustomerProfilePage = memo((props: CustomerProfilePageProps) => {
                             title="Маркетплейс"
                         >
                             <h1 className={classes.title}>Маркетплейс</h1>
-                            <h3>Маркетплейс</h3>
+                            <Marketplace customer={customer} />
+                        </Tab>
+                        <Tab
+                            eventKey="settings"
+                            title="Настройки"
+                        >
+                            <h1 className={classes.title}>Настройки</h1>
                         </Tab>
                     </Tabs>
                 </ContentWrapper>

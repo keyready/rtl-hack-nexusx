@@ -18,9 +18,7 @@ export const AchievementsList = memo((props: AchievementsListProps) => {
         customer,
     } = props;
 
-    const { isLoading, data: achievements } = useAchievements(1, {
-        pollingInterval: 3000,
-    });
+    const { isLoading, data: achievements } = useAchievements(1);
 
     return (
         <VStack

@@ -10,6 +10,7 @@ import { rtkApi } from 'shared/api/rtkApi';
 import { AchievementSchema } from 'entities/Achievement';
 import { TaskSchema } from 'entities/Task';
 import { CustomerSchema } from 'entities/Customer';
+import { ProductSchema } from 'entities/Product';
 
 export interface StateSchema {
     counter: CounterSchema;
@@ -20,8 +21,9 @@ export interface StateSchema {
     // asynchronous reducers
     loginForm?: LoginSchema;
     achievement?: AchievementSchema;
-    task?: TaskSchema
-    customer?: CustomerSchema
+    task?: TaskSchema;
+    customer?: CustomerSchema;
+    product?: ProductSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;

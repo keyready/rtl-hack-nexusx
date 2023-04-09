@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { USER_LOCALSTORAGE_KEY } from 'shared/const';
+import { updateUserData } from 'entities/User/model/services/updateUserData';
 import { User, UserSchema } from '../types/user';
 
 const initialState: UserSchema = {
@@ -28,6 +29,10 @@ export const userSlice = createSlice({
             state.authData = undefined;
         },
     },
+    extraReducers: (builder) => builder
+        .addCase(updateUserData.fulfilled, (state, action: PayloadAction<User>) => {
+            state.authData = action.payload;
+        }),
 });
 
 export const { actions: userActions } = userSlice;

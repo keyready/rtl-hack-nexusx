@@ -1,4 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAchievement } from '../services/createAchievement';
+import { deleteAchievement } from '../services/deleteAchievement';
 import { Achievement, AchievementSchema } from '../types/AchievementSchema';
 import { fetchAchievement } from '../services/fetchAchievement';
 
@@ -27,6 +29,30 @@ export const AchievementSlice = createSlice({
                 state.data = action.payload;
             })
             .addCase(fetchAchievement.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+            })
+
+            .addCase(createAchievement.pending, (state) => {
+                state.error = undefined;
+                state.isLoading = true;
+            })
+            .addCase(createAchievement.fulfilled, (state) => {
+                state.isLoading = false;
+            })
+            .addCase(createAchievement.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+            })
+
+            .addCase(deleteAchievement.pending, (state) => {
+                state.error = undefined;
+                state.isLoading = true;
+            })
+            .addCase(deleteAchievement.fulfilled, (state) => {
+                state.isLoading = false;
+            })
+            .addCase(deleteAchievement.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
             });

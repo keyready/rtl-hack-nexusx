@@ -6,6 +6,7 @@ import { UserRoles } from 'entities/User';
 import { AdminPanelPage } from 'pages/AdminPanelPage';
 import { ForbiddenPage } from 'pages/ForbiddenPage';
 import { CustomerProfilePage } from 'pages/CustomerProfilePage';
+import { RegisterPage } from 'pages/RegisterPage';
 
 export type AppRoutesProps = RouteProps & {
     authOnly?: boolean;
@@ -17,6 +18,7 @@ export enum AppRoutes {
     ABOUT = 'about',
     ADMIN_PANEL = 'admin_panel',
     CUSTOMER_PROFILE = 'customer_profile',
+    REGISTER_PAGE = 'register_page',
 
     // last
     FORBIDDEN = 'forbidden',
@@ -27,6 +29,7 @@ export const RoutePath: Record<AppRoutes, string> = {
     // main
     [AppRoutes.MAIN]: '/',
     [AppRoutes.ABOUT]: '/about',
+    [AppRoutes.REGISTER_PAGE]: '/register',
     [AppRoutes.CUSTOMER_PROFILE]: '/customer/',
     [AppRoutes.ADMIN_PANEL]: '/admin',
 
@@ -43,6 +46,10 @@ export const routerConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.ABOUT]: {
         path: RoutePath.about,
         element: <AboutPage />,
+    },
+    [AppRoutes.REGISTER_PAGE]: {
+        path: RoutePath.register_page,
+        element: <RegisterPage />,
     },
     [AppRoutes.CUSTOMER_PROFILE]: {
         path: `${RoutePath.customer_profile}:id`,

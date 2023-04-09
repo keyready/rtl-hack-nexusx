@@ -133,9 +133,7 @@ export const RegistrationForm = memo((props: RegistrationFormProps) => {
     /**
      *
      *
-     *                                     onChange={changeMiddlenameHandler}
-     *                                     value={middlename}
-     *                                     placeholder="Отчество"
+     *
      */
 
     return (
@@ -166,11 +164,10 @@ export const RegistrationForm = memo((props: RegistrationFormProps) => {
                                     value={lastname}
                                     placeholder="Фамилия"
                                 />
-                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                 <Form.Control.Feedback
                                     type="invalid"
                                 >
-                                    Введите
+                                    Введите фамилию
                                 </Form.Control.Feedback>
                             </InputGroup>
                         </FormGroup>
@@ -184,11 +181,27 @@ export const RegistrationForm = memo((props: RegistrationFormProps) => {
                                     value={firstname}
                                     placeholder="Имя"
                                 />
-                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                 <Form.Control.Feedback
                                     type="invalid"
                                 >
-                                    Введите
+                                    Введите имя
+                                </Form.Control.Feedback>
+                            </InputGroup>
+                        </FormGroup>
+
+                        <FormGroup>
+                            <InputGroup hasValidation>
+                                <InputGroup.Text>Отчество</InputGroup.Text>
+                                <Form.Control
+                                    required
+                                    onChange={changeMiddlenameHandler}
+                                    value={middlename}
+                                    placeholder="Отчество"
+                                />
+                                <Form.Control.Feedback
+                                    type="invalid"
+                                >
+                                    Введите отчество
                                 </Form.Control.Feedback>
                             </InputGroup>
                         </FormGroup>

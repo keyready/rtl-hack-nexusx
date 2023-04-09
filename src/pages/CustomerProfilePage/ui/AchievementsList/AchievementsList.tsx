@@ -20,6 +20,25 @@ export const AchievementsList = memo((props: AchievementsListProps) => {
 
     const { isLoading, data: achievements } = useAchievements(1);
 
+    if (isLoading) {
+        return (
+            <VStack
+                className={classNames(classes.AchievementsList, {}, [className])}
+                max
+                gap="8"
+                justify="start"
+                align="center"
+            >
+                {new Array(3).fill(0).map((_, index) => (
+                    <AchievementCard
+                        key={index}
+                        isLoading
+                    />
+                ))}
+            </VStack>
+        );
+    }
+
     return (
         <VStack
             className={classNames(classes.AchievementsList, {}, [className])}

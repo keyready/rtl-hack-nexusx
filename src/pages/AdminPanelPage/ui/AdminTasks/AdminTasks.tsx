@@ -56,7 +56,7 @@ export const AdminTasks = memo((props: AdminTasksProps) => {
                     onClick={showHandler}
                     className={classes.btn}
                 >
-                    Добавить товар
+                    Добавить задание
                 </Button>
             </HStack>
             <ContentWrapper

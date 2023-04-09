@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { registerVendor } from '../services/registerVendor';
 import { registerCustomer } from '../services/registerCustomer';
 import { RegisterPageSchema } from '../types/RegisterPageSchema';
 
@@ -28,6 +29,20 @@ export const RegisterPageSlice = createSlice({
                 state.data = 'Регистрация успешна';
             })
             .addCase(registerCustomer.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload || '';
+            })
+
+            .addCase(registerVendor.pending, (state) => {
+                state.error = '';
+                state.isLoading = true;
+            })
+            .addCase(registerVendor.fulfilled, (state) => {
+                state.error = '';
+                state.isLoading = false;
+                state.data = 'Регистрация успешна';
+            })
+            .addCase(registerVendor.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload || '';
             });

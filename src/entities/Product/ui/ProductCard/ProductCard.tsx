@@ -53,7 +53,7 @@ export const ProductCard = memo((props: ProductCardProps) => {
             setPurchaseResultVisibility(true);
             setIsPurchaseProcessing(false);
         } else {
-            setPurchaseResult('Ошибка во время покупки');
+            setPurchaseResult('Проверьте баланс..)');
             setPurchaseResultVisibility(true);
             setIsPurchaseProcessing(false);
         }

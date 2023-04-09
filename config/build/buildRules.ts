@@ -11,6 +11,18 @@ export function buildRules(options: BuildOptions): webpack.RuleSetRule[] {
         use: ['@svgr/webpack'],
     };
 
+    const fontsLoader = {
+        test: /\.(woff|woff2)$/,
+        use: {
+            loader: 'font-loader',
+            options: {
+                outputPath: 'fonts/', // путь для сохранения шрифтов
+                publicPath: '../fonts/', // путь к шрифтам в CSS файле
+                name: '[name].[ext]',
+            },
+        },
+    };
+
     const babelLoader = buildBabelLoader(options);
 
     const fileLoader = {
@@ -31,6 +43,7 @@ export function buildRules(options: BuildOptions): webpack.RuleSetRule[] {
     const sassLoader = BuildCssLoader(isDev);
 
     return [
+        fontsLoader,
         fileLoader,
         svgLoader,
         babelLoader,

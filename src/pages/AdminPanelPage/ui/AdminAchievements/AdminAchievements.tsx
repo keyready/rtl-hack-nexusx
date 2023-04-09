@@ -3,7 +3,7 @@ import {
     FormEvent, memo, useCallback, useState,
 } from 'react';
 import { ContentWrapper } from 'shared/UI/ContentWrapper';
-import { useAchievements } from 'pages/CustomerProfilePage/api/achievementsApi';
+import { useAchievements } from 'pages/CustomerProfilePage';
 import { HStack, VStack } from 'shared/UI/Stack';
 import { Button, Modal } from 'react-bootstrap';
 import {
@@ -14,7 +14,7 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { Loader } from 'shared/UI/Loader';
 import {
     CreateAchievementForm,
-} from './CreateAchievementForm';
+} from './CreateAchievementForm/CreateAchievementForm';
 import classes from './AdminAchievements.module.scss';
 
 interface AdminAchievementsProps {

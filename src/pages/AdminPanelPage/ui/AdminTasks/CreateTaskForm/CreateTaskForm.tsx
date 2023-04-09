@@ -1,14 +1,14 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { FormEvent, memo } from 'react';
-import { Button, Form, InputGroup } from 'react-bootstrap';
-import classes from './CreateProduct.module.scss';
+import { Button, Form } from 'react-bootstrap';
+import classes from './CreateTaskForm.module.scss';
 
-interface CreateProductProps {
+interface CreateTaskFormProps {
     className?: string;
     onClick?: (e: FormEvent<HTMLFormElement>) => void;
 }
 
-export const CreateProduct = memo((props: CreateProductProps) => {
+export const CreateTaskForm = memo((props: CreateTaskFormProps) => {
     const {
         className,
         onClick,
@@ -16,6 +16,7 @@ export const CreateProduct = memo((props: CreateProductProps) => {
 
     return (
         <Form
+            encType="multipart/form-data"
             onSubmit={onClick}
             className={classNames(classes.CreateAchievementForm, {}, [className])}
         >
@@ -23,13 +24,6 @@ export const CreateProduct = memo((props: CreateProductProps) => {
                 <Form.Control
                     name="title"
                     placeholder="Название"
-                    type="text"
-                />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Control
-                    name="description"
-                    placeholder="Описание"
                     type="text"
                 />
             </Form.Group>

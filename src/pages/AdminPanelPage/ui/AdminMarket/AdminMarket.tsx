@@ -6,10 +6,9 @@ import { Button, Modal } from 'react-bootstrap';
 import { HStack, VStack } from 'shared/UI/Stack';
 import { ContentWrapper } from 'shared/UI/ContentWrapper';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { useProducts } from 'widgets/Marketplace/api/productsApi';
-import { ProductCard } from 'entities/Product/ui/ProductCard/ProductCard';
-import { createProduct, deleteProduct } from 'entities/Product';
-import { CreateProduct } from './CreateProduct';
+import { useProducts } from 'widgets/Marketplace';
+import { ProductCard, createProduct, deleteProduct } from 'entities/Product';
+import { CreateProductForm } from './CreateProductForm/CreateProductForm';
 import classes from './AdminMarket.module.scss';
 
 interface AdminMarketProps {
@@ -49,7 +48,7 @@ export const AdminMarket = memo((props: AdminMarketProps) => {
                     <Modal.Title>Добавить товар</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <CreateProduct onClick={createProductHandler} />
+                    <CreateProductForm onClick={createProductHandler} />
                 </Modal.Body>
             </Modal>
 

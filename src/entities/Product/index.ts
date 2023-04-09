@@ -7,3 +7,4 @@ export {
 } from './model/selectors/getProductData';
 export { createProduct } from './model/services/createProduct';
 export { deleteProduct } from './model/services/deleteProduct';
+export { ProductCard } from './ui/ProductCard/ProductCard';

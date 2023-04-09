@@ -8,7 +8,7 @@ import { ContentWrapper } from 'shared/UI/ContentWrapper';
 import { useTasks } from 'pages/CustomerProfilePage';
 import { TaskCard, deleteTask, createTask } from 'entities/Task';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { CreateTaskForm } from './CreateTaskForm';
+import { CreateTaskForm } from './CreateTaskForm/CreateTaskForm';
 import classes from './AdminTasks.module.scss';
 
 interface AdminTasksProps {

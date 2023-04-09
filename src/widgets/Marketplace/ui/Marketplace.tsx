@@ -65,6 +65,7 @@ export const Marketplace = memo((props: MarketplaceProps) => {
                 gap="32"
             >
                 <Form
+                    onSubmit={(e) => e.preventDefault()}
                     className={classes.filters}
                 >
                     <Form.Control

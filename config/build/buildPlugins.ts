@@ -2,7 +2,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import webpack from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import CopyPlugin from 'copy-webpack-plugin';
+// import CopyPlugin from 'copy-webpack-plugin';
 import { BuildOptions } from './config/types';
 
 export function buildPlugins(
@@ -28,7 +28,7 @@ export function buildPlugins(
 
         // new CopyPlugin({
         //     patterns: [
-        //         { from: paths.locales, to: paths.buildLocales },
+        //         { from: paths.fontsFrom, to: paths.fontsTo },
         //     ],
         // }),
     ];

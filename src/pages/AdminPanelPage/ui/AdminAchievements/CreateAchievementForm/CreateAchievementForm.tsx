@@ -16,6 +16,7 @@ export const CreateAchievementForm = memo((props: CreateAchievementFormProps) =>
 
     return (
         <Form
+            encType="multipart/form-data"
             onSubmit={onClick}
             className={classNames(classes.CreateAchievementForm, {}, [className])}
         >
